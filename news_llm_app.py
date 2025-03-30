@@ -15,6 +15,9 @@ def main():
     user_prompt = st.text_input("Enter your question:")
     submitted = st.button("🗞️ Get News Summary")
     success = False
+
+    # Get cohere API key
+    key = st.secrets["COHERE_API_KEY"]
     
     # Proceed when button is clicked
     if user_prompt or submitted:
@@ -29,7 +32,7 @@ def main():
 
                 # Use the LLM-based function to extract query, startdate, and enddate
                 st.write("⚙️ Transforming query...")
-                gdelt_params = get_gdelt_params(user_prompt)
+                gdelt_params = get_gdelt_params(key, user_prompt)
 
                 # Check if the response is valid
                 if not isinstance(gdelt_params, dict):
@@ -47,7 +50,7 @@ def main():
                         
                         # Use the LLM-based function to generate a summary and recommendations based on the articles
                         st.write("📝 Generating summary...")
-                        summary = get_summary(user_prompt, gdelt_articles)
+                        summary = get_summary(key, user_prompt, gdelt_articles)
 
                         # Check if the response is valid
                         if not isinstance(summary, str):
