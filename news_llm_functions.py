@@ -144,7 +144,7 @@ def get_summary(key, user_prompt, gdelt_articles):
     The user will give you a list of articles from GDELT including the URL, Date and Title.
     The user has previously asked:
     {user_prompt}
-    Respond with a brief summary responding to the users previous question.
+    Respond to the users previous question with a brief summary.
     Base your response only on the information from the given articles.
     Recommend the user between 1 and 5 most relevant articles including the URLs and titles. Translate the titles to English if necessary.
     Respond only with the summary and recommended articles.
