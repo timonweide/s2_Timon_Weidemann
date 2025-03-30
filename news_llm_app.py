@@ -26,38 +26,41 @@ def main():
         with st.status("⏳ Processing your request..."):
 
             # Check if user input is empty
-            if not user_prompt:
-                st.info("⚠️ Please enter a question to proceed.")
+            if not isinstance(user_prompt, str) or not user_prompt:
+                st.info("⚠️ Please enter a valid question to proceed.")
             else:
+                st.success("✅ Question received!")
 
                 # Use the LLM-based function to extract query, startdate, and enddate
                 st.write("⚙️ Transforming query...")
                 gdelt_params = get_gdelt_params(key, user_prompt)
 
                 # Check if the response is valid
-                if not isinstance(gdelt_params, dict):
-                    st.error(f"⚠️ Error transforming query. Response: {gdelt_params}")
+                if not isinstance(gdelt_params, dict) or not gdelt_params:
+                    st.error(f"⚠️ Invalid or missing query. Response: {gdelt_params}")
                 else:
+                    st.success("✅ Valid GDELT parameters retrieved!")
                 
                     # Query the GDELT API using the parameters
                     st.write("📥 Fetching articles...")
                     gdelt_articles = get_gdelt_articles(gdelt_params)
                     
                     # Check if the response is valid
-                    if not isinstance(gdelt_articles, dict):
-                        st.error(f"⚠️ Error fetching articles. Response: {gdelt_articles}")
+                    if not isinstance(gdelt_articles, dict) or not gdelt_articles:
+                        st.error(f"⚠️ Invalid or missing articles. Response: {gdelt_articles}")
                     else:
+                        st.success("✅ Valid GDELT articles retrieved!")
                         
                         # Use the LLM-based function to generate a summary and recommendations based on the articles
                         st.write("📝 Generating summary...")
                         summary = get_summary(key, user_prompt, gdelt_articles)
 
                         # Check if the response is valid
-                        if not isinstance(summary, str):
-                            st.error(f"⚠️ Error generating summary. Response: {summary}")
+                        if not isinstance(summary, str) or not summary:
+                            st.error(f"⚠️ Invalid or missing summary. Response: {summary}")
                         else:
-                            success = "✅ Summary generated successfully!"
-                            st.success(success)
+                            st.success("✅ Summary generated successfully!")
+                            success = True
 
         # Check if request was successful
         if success:
