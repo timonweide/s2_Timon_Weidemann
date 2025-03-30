@@ -29,7 +29,7 @@ def main():
             if not isinstance(user_prompt, str) or not user_prompt:
                 st.info("⚠️ Please enter a valid question to proceed.")
             else:
-                st.success("✅ Question received!")
+                st.info("✅ Question received!")
 
                 # Use the LLM-based function to extract query, startdate, and enddate
                 st.write("⚙️ Transforming query...")
@@ -39,7 +39,7 @@ def main():
                 if not isinstance(gdelt_params, dict) or not gdelt_params:
                     st.error(f"⚠️ Invalid or missing query. Response: {gdelt_params}")
                 else:
-                    st.success("✅ Valid GDELT parameters retrieved!")
+                    st.info("✅ Valid GDELT parameters retrieved!")
                 
                     # Query the GDELT API using the parameters
                     st.write("📥 Fetching articles...")
@@ -49,7 +49,7 @@ def main():
                     if not isinstance(gdelt_articles, dict) or not gdelt_articles:
                         st.error(f"⚠️ Invalid or missing articles. Response: {gdelt_articles}")
                     else:
-                        st.success("✅ Valid GDELT articles retrieved!")
+                        st.info("✅ Valid GDELT articles retrieved!")
                         
                         # Use the LLM-based function to generate a summary and recommendations based on the articles
                         st.write("📝 Generating summary...")
