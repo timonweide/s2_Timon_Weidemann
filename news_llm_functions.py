@@ -8,12 +8,10 @@ from fpdf.enums import XPos, YPos
 
 ### Create prompt to GDELT parameter transformation
 
-def get_gdelt_params(user_prompt):
+def get_gdelt_params(key, user_prompt):
 
     # Initialize Cohere client
-    with open("key.txt") as f:
-        COHERE_API_KEY = f.read()
-    cohere_client = cohere.ClientV2(COHERE_API_KEY)
+    cohere_client = cohere.ClientV2(key)
 
     # Save the date for today
     today = date.today().strftime("%Y%m%d")
@@ -136,12 +134,10 @@ def get_gdelt_articles(gdelt_params):
 
 ### Create GDELT articles to summary transformation
 
-def get_summary(user_prompt, gdelt_articles):
+def get_summary(key, user_prompt, gdelt_articles):
 
     # Initialize Cohere client
-    with open("key.txt") as f:
-        COHERE_API_KEY = f.read()
-    cohere_client = cohere.ClientV2(COHERE_API_KEY)
+    cohere_client = cohere.ClientV2(key)
 
     # Define the system parameters
     system_prompt = f"""
