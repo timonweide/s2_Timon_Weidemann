@@ -1,0 +1,7 @@
+cohere
+json
+datetime
+requests
+fpdf2
+streamlit
+pandas
