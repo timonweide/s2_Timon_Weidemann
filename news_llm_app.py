@@ -3,6 +3,13 @@ import pandas as pd
 from news_llm_functions import get_gdelt_params, get_gdelt_articles, get_summary, generate_pdf
 
 def main():
+
+    # Set page configuration
+    st.set_page_config(
+        page_title="World News Summarizer",
+        page_icon="🗞️",
+        layout="wide"
+    )
     
     # Initialize Streamlit app
     st.title("🌍 World News Summarizer")
